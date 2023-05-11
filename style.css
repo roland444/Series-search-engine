@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #585858;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+}
+
+#search-section {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #4c4c4c;
+}
+
+#search-section input {
+    display: inline-block;
+    padding: 5px;
+    background-color: black;
+    color: silver;
+    border: 1px solid gray;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+}
