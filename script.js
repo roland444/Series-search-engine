@@ -27,6 +27,8 @@ let showsApp = {
     dataReady: function(showData) {
         this.data = showData;
 
+        let allBoxesHtml = "";
+
         for (let i = 0; i < showData.length; i++) {
             let show = showData[i];
             let score = show.score;
@@ -35,11 +37,51 @@ let showsApp = {
             let genres = show.genres.join(", ")
             
             let imgSrc = null;
-            let imgSrcOrigin = null;
+            let imgSrcOriginal = null;
             if (show.image) {
                 imgSrc = show.image.medium;
-                imgSrcOrigin = show.image.original;
+                imgSrcOriginal = show.image.original;
+            } else {
+                imgSrc = "https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_960_720.png";
+                imgSrcOriginal = "https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_960_720.png";
             }
+
+            let showTitle = null;
+            if (!show.name) continue;
+            showTitle = show.name;
+
+            let network = "-";
+            if (show.network) network = show.network.name;
+
+            let officialSite = "-";
+            if (show.officialSite) officialSite = show.officialSite;
+
+            let premiered = "-";
+            if (show.premiered) premiered = show.premiered;
+
+            let summary = show.summary;
+            summary = `
+                <p>Show: ${showTitle} </p>
+                <p>Date: ${premiered} </p>
+                <p>Network: ${network} </p>
+                <br>
+            ` + summary ;
+
+            allBoxesHtml += this.getShowBoxByTemplate(imgSrc,
+                    showTitle, genres, summary)
         }
+
+        this.showsDataSection.innerHTML = allBoxesHtml;
+    },
+
+    getShowBoxByTemplate: function(imgSrc, title, genres, overview) {
+        return `
+        <div class="show-box">
+            <img src="${imgSrc}" alt="">
+            <div class="show-title">${title}</div>
+            <div class="show-genres">${genres}</div>
+            <div class="show-overview">${overview}</div>
+        </div>
+        `
     }
 }
